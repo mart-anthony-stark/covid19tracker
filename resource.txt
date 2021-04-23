@@ -1,0 +1,13 @@
+google geocoding = https://maps.googleapis.com/maps/api/geocode/json?address=philippines&key=AIzaSyC2srtlkhTule--pTQrvYVk9glMV4MYsQg
+
+locationIQ = https://us1.locationiq.com/v1/search.php?key=pk.4adb1d35de1cc69cdc100344c21be0e7&q=Afghanistan&format=json
+
+covid19API = https://api.covid19api.com/summary
+
+mapbox api key = pk.eyJ1IjoibWFydC1hbnRob255IiwiYSI6ImNrbnNnemZ0MDA5dWYyd3Q5ODBoa3lnZHMifQ.uIzVCMi2fXKHNrCKc7BkRA
+
+mapbox geocoding = https://api.mapbox.com/geocoding/v5/mapbox.places/Philippines.json?access_token=pk.eyJ1IjoibWFydC1hbnRob255IiwiYSI6ImNrbnNnemZ0MDA5dWYyd3Q5ODBoa3lnZHMifQ.uIzVCMi2fXKHNrCKc7BkRA
+
+newsapi key = be534b0041074734a8464fcd944398dd
+
+health newsapi = https://newsapi.org/v2/top-headlines?country=ph&category=health&apiKey=be534b0041074734a8464fcd944398dd
