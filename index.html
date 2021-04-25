@@ -3,19 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>COVID-19 Tracker</title>
+    <title>COVID-19 Statistics</title>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <div id="root" v-cloak>
-      <div class="info" @click="showLegend = !showLegend">i</div>
-      <div class="legend" v-if="showLegend">
-        Total Deaths:
-          <div class="yellow"></div> below 200
-          <div class="orange"></div> 200-499
-          <div class="red"></div> 500 and above
-        </div>
       <nav>
         <div class="menu-btn" @click="toggleMenu">
           <div class="bar"></div>
@@ -24,8 +17,8 @@
       </nav>
       <div class="sidebar">
         <a href="#">Home</a>
-        <a href="#">Statistics</a>
-        <a href="#">Health News</a>
+        <a href="./map.html">Tracker Map</a>
+        <a href="./news.html">Health News</a>
         <a href="#">About</a>
       </div>
       <div class="error-popup">
@@ -34,14 +27,63 @@
         <p>-Mart Salazar</p>
         <button @click="location.reload()">RELOAD PAGE</button>
       </div>
-      <div id="map"></div>
+      <div class="main">
+        <div class="header">
+          <h2>Global Statistics</h2>
+          <div class="boxes">
+            <div class="box">
+              <strong>New Confirmed Cases:</strong> <span>{{summary.Global.NewConfirmed}}</span>
+              <strong>New Deaths:</strong> <span>{{summary.Global.NewDeaths}}</span>
+              <strong>New Recovered:</strong> <span>{{summary.Global.NewRecovered}}</span>
+            </div>
+            <div class="box">
+              <strong>Total Confirmed Cases:</strong> <span>{{summary.Global.TotalConfirmed}}</span>
+              <strong>Total Deaths:</strong> <span>{{summary.Global.TotalDeaths}}</span>
+              <strong>Total Recovered:</strong> <span>{{summary.Global.TotalRecovered}}</span>
+            </div>
+          </div>
+          <!-- COUNTRIES TABLE -->
+          
+          <div class="stats-table">
+            <input id="country-search" type="text" placeholder="Search Country" v-model="search">
+            <table class="lg-table">
+              <tr>
+                <th>Country</th>
+                <th>New Confirmed</th>
+                <th>New Deaths</th>
+                <th>New Recovered</th>
+                <th>Total Confirmed</th>
+                <th>Total Deaths</th>
+                <th>Total Recovered</th>
+              </tr>
+              <tr v-for="country in filteredCountries">
+                <td>{{country.Country}}</td>
+                <td>{{country.NewConfirmed}}</td>
+                <td>{{country.NewDeaths}}</td>
+                <td>{{country.NewRecovered}}</td>
+                <td>{{country.TotalConfirmed}}</td>
+                <td>{{country.TotalDeaths}}</td>
+                <td>{{country.TotalRecovered}}</td>
+              </tr>
+              <h3 v-if="filteredCountries.length == 0">No results found.</h3>
+            </table>
+            <div class="stats-box box" v-for="country in filteredCountries">
+              <h3>Country: <span>{{country.Country}}</h3></span>
+              <h3>New Confirmed: <span>{{country.NewConfirmed}}</h3></span>
+              <h3>New Deaths: <span>{{country.NewDeaths}}</h3></span>
+              <h3>New Recovered: <span>{{country.NewRecovered}}</h3></span>
+              <h3>Total Confirmed: <span>{{country.TotalConfirmed}}</h3></span>
+              <h3>Total Deaths: <span>{{country.TotalDeaths}}</h3></span>
+              <h3>Total Recovered: <span>{{country.TotalRecovered}}</h3></span>
+            </div>
+          </div>
+          
+        </div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
-    <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
-    
     <script src="vue-app.js"></script>
-    <script src="script.js"></script>
     
   </body>
 </html>

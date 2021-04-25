@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap');
-
+@import url('./statistics.css');
 *{
   margin: 0;
   padding: 0;
@@ -10,6 +10,10 @@
 }
 html{
   font-family: 'Rubik', sans-serif;
+}
+svg{
+  opacity: 0.6;
+  border-radius: 70%;
 }
 .info{
   cursor: pointer;
@@ -58,7 +62,7 @@ nav{
   display: flex;
   align-items: center;
   padding: 0px 25px;
-  z-index: 3;
+  z-index: 55;
 }
 nav .menu-btn{
   position: relative;
@@ -112,7 +116,7 @@ nav .menu-btn{
   justify-content: center;
   align-items: center;
   margin-left: -250px;
-  z-index: 2;
+  z-index: 50;
   transition: .5s ease-in-out;
 }
 .sidebar.open{

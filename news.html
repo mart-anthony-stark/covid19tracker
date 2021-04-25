@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>COVID-19 Tracker</title>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div id="root" v-cloak>      
+      <nav>
+        <div class="menu-btn" @click="toggleMenu">
+          <div class="bar"></div>
+        </div>
+        <h3>Health News</h3>
+      </nav>
+      <div class="sidebar">
+        <a href="./index.html">Home</a>
+        <a href="./map.html">Tracker Map</a>
+        <a href="./#">Health News</a>
+        <a href="#">About</a>
+      </div>
+      
+      <div class="main">
+        <div class="boxes">
+          <div class="news-box" v-for="article in news.articles">
+            <img :src="article.urlToImage" alt="">
+            <a :href="article.url" target="_blank">{{article.title}}</a>
+            <p>-{{article.author}}</p>
+            <p>{{article.description}}</p>
+            
+            <p>Date published: {{article.publishedAt.toLocaleString()}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    
+    <script src="news-app.js"></script>
+    <script src="script.js"></script>
+    
+  </body>
+</html>

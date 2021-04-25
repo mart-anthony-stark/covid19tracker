@@ -2,8 +2,9 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoibWFydC1hbnRob255IiwiYSI6ImNrbnNnemZ0MDA5dWYyd3Q5ODBoa3lnZHMifQ.uIzVCMi2fXKHNrCKc7BkRA';
 var map = new mapboxgl.Map({
   container: 'map',
+  sprite: "mapbox://sprites/mapbox/streets-v8",
   style: 'mapbox://styles/mapbox/dark-v10',
-  zoom: 1.5,
+  zoom: 2.5,
   center: [0, 20]
 });
 
@@ -11,6 +12,18 @@ var map = new mapboxgl.Map({
 // LOCAL DATA ARRAY STORAGE
 let summary = []
 
+// FORMAT NUMBERS WITH COMMA
+function addCommas(nStr){
+      nStr += '';
+      var x = nStr.split('.');
+      var x1 = x[0];
+      var x2 = x.length > 1 ? '.' + x[1] : '';
+      var rgx = /(\d+)(\d{3})/;
+      while (rgx.test(x1)) {
+       x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+     return x1 + x2;
+}
 
 // GET REQUEST -> COVID19 API
 fetch('https://api.covid19api.com/summary')
@@ -19,6 +32,16 @@ fetch('https://api.covid19api.com/summary')
     if(data.Countries.length === 0){
       document.querySelector('.error-popup').style.display = 'flex'
     }
+
+    data.Countries.forEach(country => {
+      country.NewConfirmed = addCommas(country.NewConfirmed)
+      country.TotalConfirmed = addCommas(country.TotalConfirmed)
+      country.NewDeaths = addCommas(country.NewDeaths)
+      country.TotalDeaths = addCommas(country.TotalDeaths)
+      country.NewRecovered = addCommas(country.NewRecovered)
+      country.TotalRecovered = addCommas(country.TotalRecovered)
+    })
+    
     summary = data
     init()
   }).catch(err=>{
@@ -29,9 +52,13 @@ fetch('https://api.covid19api.com/summary')
 
 // DECIDE MARKER COLORS BASED ON TOTAL DEATHS PER COUNTRY
 function markerColors(totalDeaths){
-  if(totalDeaths >= 500) return 'Red'
-  if(totalDeaths >= 200) return 'Orange'
-  else return 'Yellow'
+  if(totalDeaths >= 1000) {
+    return 'Red'
+  }else if(totalDeaths >= 200) {
+    return 'Orange'
+  }else if(totalDeaths < 200){
+    return 'Yellow'
+  }else return 'Red'
 }
 
 // CONVERT COUNTRY NAME TO coordinates
@@ -65,4 +92,3 @@ function init(){
     })
   })
 }
-

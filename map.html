@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>COVID-19 Tracker</title>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div id="root" v-cloak>
+      <div class="info" @click="showLegend = !showLegend">i</div>
+      <div class="legend" v-if="showLegend">
+        Total Deaths:
+          <div class="yellow"></div> below 200
+          <div class="orange"></div> 200-999
+          <div class="red"></div> 1000 and above
+        </div>
+      <nav>
+        <div class="menu-btn" @click="toggleMenu">
+          <div class="bar"></div>
+        </div>
+        <h3>Coronavirus Tracker</h3>
+      </nav>
+      <div class="sidebar">
+        <a href="./index.html">Home</a>
+        <a href="#">Tracker Map</a>
+        <a href="./news.html">Health News</a>
+        <a href="#">About</a>
+      </div>
+      <div class="error-popup">
+        <h2>Service Temporarily Unavailable</h2>
+        <h4>&emsp;Our app is currently undergoing routine maintenance to bring you the latest update for covid cases. We'll be back in a bit!</h4>
+        <p>-Mart Salazar</p>
+        <button @click="location.reload()">RELOAD PAGE</button>
+      </div>
+      <div id="map"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+    
+    <script src="vue-app.js"></script>
+    <script src="script.js"></script>
+    
+  </body>
+</html>
