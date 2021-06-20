@@ -3,7 +3,8 @@ new Vue({
   data(){
     return{
       showLegend: false,
-      news: []
+      news: [],
+      showBackToTop: false
     }
   },
   methods: {
@@ -21,6 +22,12 @@ new Vue({
        x1 = x1.replace(rgx, '$1' + ',' + '$2');
         }
      return x1 + x2;
+    },
+    scroll(){
+      console.log("Scroll")
+      let currentScroll = window.pageYOffset
+      if(this.currentScroll === 0) this.showBackToTop = false
+      else this.showBackToTop = true
     }
   },
   computed:{

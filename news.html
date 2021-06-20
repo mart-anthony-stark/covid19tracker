@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html @scroll="scroll">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>COVID-19 Tracker</title>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="news.css">
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
@@ -21,16 +22,15 @@
         <a href="./#">Health News</a>
         <a href="#">About</a>
       </div>
-      
+      <a v-if="showBackToTop" href="#" class="backToTop"><i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i></a>
       <div class="main">
         <div class="boxes">
           <div class="news-box" v-for="article in news.articles">
             <img :src="article.urlToImage" alt="">
             <a :href="article.url" target="_blank">{{article.title}}</a>
-            <p>-{{article.author}}</p>
             <p>{{article.description}}</p>
             
-            <p>Date published: {{article.publishedAt.toLocaleString()}}</p>
+            <p><strong>Date published:</strong> {{article.publishedAt.toLocaleString()}}</p>
           </div>
         </div>
       </div>
